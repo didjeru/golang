@@ -10,7 +10,7 @@ import (
 func getRandomNumber(numberMin, numberMax int) int {
 	defer func() {
 		if r := recover(); r != nil {
-			fmt.Println("You are chiter!")
+			fmt.Println("You are cheater!")
 			os.Exit(3)
 		}
 	}()
