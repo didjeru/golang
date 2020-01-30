@@ -35,11 +35,11 @@ func main() {
 	fmt.Println("Your number", compNumber, "?")
 	countTry := 0
 	for {
-		num := inputData("Enter symbol < or = or > :")
-		if num == "<" || num == "=" || num == ">" {
+		inputSymbol := inputData("Enter symbol < or = or > :")
+		if inputSymbol == "<" || inputSymbol == "=" || inputSymbol == ">" {
 			countTry++
 		}
-		switch num {
+		switch inputSymbol {
 		case "=":
 			fmt.Println("Win witn", countTry, "try. And number -", compNumber)
 			os.Exit(3)
