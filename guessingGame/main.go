@@ -7,10 +7,14 @@ import (
 	"time"
 )
 
+var numberMin, numberMax = 0, 100
+var compNumber = getRandomNumber(numberMin, numberMax)
+var countTry = 0
+
 func getRandomNumber(numberMin, numberMax int) int {
 	defer func() {
 		if r := recover(); r != nil {
-			fmt.Println("You are cheater!")
+			fmt.Println("You are chiter!")
 			os.Exit(3)
 		}
 	}()
@@ -27,15 +31,11 @@ func inputData(msg string) string {
 	return data
 }
 
-func main() {
-	rand.Seed(time.Now().UnixNano())
-	fmt.Println("Guessing game!\nThink of a number in the range of 0 to about 100")
-	var numberMin, numberMax = 0, 100
-	compNumber := getRandomNumber(numberMin, numberMax)
+func variant1(){
+	fmt.Println("Think of a number in the range of 0 to about 100")
 	fmt.Println("Your number", compNumber, "?")
-	countTry := 0
 	for {
-		inputSymbol := inputData("Enter symbol < or = or > :")
+		inputSymbol := inputData("Enter symbol <, =, > or exit:")
 		if inputSymbol == "<" || inputSymbol == "=" || inputSymbol == ">" {
 			countTry++
 		}
@@ -54,5 +54,27 @@ func main() {
 		default:
 			fmt.Println("Wrong symbol")
 		}
+	}
+}
+
+func variant2() {
+	fmt.Println("Computer think of a number in the range of 0 to about 100")
+	compNumber = getRandomNumber(numberMin, numberMax)
+	userNumber := inputData("Enter your number or exit")
+	countTry++
+	fmt.Println(countTry, compNumber,userNumber)
+}
+
+func main() {
+	rand.Seed(time.Now().UnixNano())
+	fmt.Println("Guessing game!")
+	inputVariant := inputData("Enter 1 if you think a number. Enter 2 if computer think a number: ")
+	switch inputVariant {
+	case "1":
+		variant1()
+	case "2":
+		variant2()
+	default:
+		fmt.Println("Wrong input number")
 	}
 }
