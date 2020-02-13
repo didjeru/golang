@@ -71,6 +71,7 @@ func variant1(compNumber, numberMin, numberMax int) {
 			print("comp", countTry, compNumber)
 		default:
 			print("InputErr", 0, 0)
+			print("comp", countTry, compNumber)
 		}
 	}
 }
@@ -81,17 +82,18 @@ func variant2(compNumber, numberMin, numberMax int) {
 	for {
 		userNumber, err := strconv.Atoi(inputData("\nType 'm' for menu, 'q' for quit.\nEnter your numer: "))
 		if err != nil {
-			print("InputErr", 0, 0)
+			print("InputErr", countTry, compNumber)
+			countTry--
 		}
 		countTry++
 		if compNumber == userNumber {
 			print("win", countTry, compNumber)
 			menu()
 		}
-		if compNumber > userNumber {
+		if userNumber != 0 && compNumber > userNumber {
 			print("userMinus", countTry, compNumber)
 		}
-		if compNumber < userNumber {
+		if userNumber != 0 && compNumber < userNumber {
 			print("userPlus", countTry, compNumber)
 		}
 	}
