@@ -70,7 +70,7 @@ func variant1(compNumber, numberMin, numberMax int) {
 			compNumber = getRandomNumber(numberMin, numberMax)
 			print("comp", countTry, compNumber)
 		default:
-			print("InputErr", countTry, compNumber)
+			print("InputErr", 0, 0)
 		}
 	}
 }
@@ -81,7 +81,7 @@ func variant2(compNumber, numberMin, numberMax int) {
 	for {
 		userNumber, err := strconv.Atoi(inputData("\nType 'm' for menu, 'q' for quit.\nEnter your numer: "))
 		if err != nil {
-			print("InputErr", countTry, compNumber)
+			print("InputErr", 0, 0)
 		}
 		countTry++
 		if compNumber == userNumber {
