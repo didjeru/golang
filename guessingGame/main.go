@@ -8,8 +8,6 @@ import (
 	"time"
 )
 
-var numberMin, numberMax, compNumber, countTry int
-
 func getRandomNumber(numberMin, numberMax int) int {
 	defer func() {
 		if r := recover(); r != nil {
@@ -33,7 +31,7 @@ func inputData(msg string) string {
 	return data
 }
 
-func print(value string) {
+func print(value string, countTry, compNumber int) {
 	switch value {
 	case "win":
 		fmt.Println("\nWin witn", countTry, "try. And number -", compNumber, "\n")
@@ -50,9 +48,10 @@ func print(value string) {
 	}
 }
 
-func variant1() {
-	fmt.Println("\nThink of a number in the range of 1 to about 100")
-	print("comp")
+func variant1(compNumber, numberMin, numberMax int) {
+	fmt.Printf("\nThink of a number in the range of %d to about %d", numberMin, numberMax)
+	countTry := 0
+	print("comp", countTry, compNumber)
 	for {
 		inputSymbol := inputData("\nType 'm' for menu, 'q' for quit.\nEnter symbol < = >: ")
 		if inputSymbol == "<" || inputSymbol == "=" || inputSymbol == ">" {
@@ -60,57 +59,56 @@ func variant1() {
 		}
 		switch inputSymbol {
 		case "=":
-			print("win")
+			print("win", countTry, compNumber)
 			menu()
 		case ">":
 			numberMin = compNumber + 1
 			compNumber = getRandomNumber(numberMin, numberMax)
-			print("comp")
+			print("comp", countTry, compNumber)
 		case "<":
 			numberMax = compNumber
 			compNumber = getRandomNumber(numberMin, numberMax)
-			print("comp")
+			print("comp", countTry, compNumber)
 		default:
-			print("err")
+			print("err", countTry, compNumber)
 		}
 	}
 }
 
-func variant2() {
-	fmt.Println("\nComputer think of a number in the range of 0 to about 100")
-	compNumber = getRandomNumber(numberMin, numberMax)
+func variant2(compNumber, numberMin, numberMax int) {
+	fmt.Printf("\nComputer think of a number in the range of %d to about %d", numberMin, numberMax)
+	countTry := 0
 	for {
 		userNumber, err := strconv.Atoi(inputData("\nType 'm' for menu, 'q' for quit.\nEnter your numer: "))
 		if err != nil {
-			print("err")
+			print("err", countTry, compNumber)
 		}
 		countTry++
 		if compNumber == userNumber {
-			print("win")
+			print("win", countTry, compNumber)
 			menu()
 		}
 		if compNumber > userNumber {
-			print("userMinus")
+			print("userMinus", countTry, compNumber)
 		}
 		if compNumber < userNumber {
-			print("userPlus")
+			print("userPlus", countTry, compNumber)
 		}
 	}
 }
 
 func menu() {
-	numberMin, numberMax = 1, 100
-	compNumber = getRandomNumber(numberMin, numberMax)
-	countTry = 0
+	numberMin, numberMax := 0, 100
+	compNumber := getRandomNumber(numberMin, numberMax)
 	for {
 		inputVariant := inputData("Type 'q' for quit.\nEnter 1 if you think a number. Enter 2 if computer think a number: ")
 		switch inputVariant {
 		case "1":
-			variant1()
+			variant1(compNumber, numberMin, numberMax)
 		case "2":
-			variant2()
+			variant2(compNumber, numberMin, numberMax)
 		default:
-			print("err")
+			print("err", 0, 0)
 		}
 	}
 }
