@@ -48,7 +48,9 @@ func print(value string, countTry, compNumber int) {
 	}
 }
 
-func variant1(compNumber, numberMin, numberMax int) {
+func variant1() {
+	numberMin, numberMax := 0, 100
+	compNumber := getRandomNumber(numberMin, numberMax)
 	fmt.Printf("\nThink of a number in the range of %d to about %d", numberMin, numberMax)
 	countTry := 0
 	print("comp", countTry, compNumber)
@@ -76,7 +78,9 @@ func variant1(compNumber, numberMin, numberMax int) {
 	}
 }
 
-func variant2(compNumber, numberMin, numberMax int) {
+func variant2() {
+	numberMin, numberMax := 0, 100
+	compNumber := getRandomNumber(numberMin, numberMax)
 	fmt.Printf("\nComputer think of a number in the range of %d to about %d", numberMin, numberMax)
 	countTry := 0
 	for {
@@ -100,15 +104,13 @@ func variant2(compNumber, numberMin, numberMax int) {
 }
 
 func menu() {
-	numberMin, numberMax := 0, 100
-	compNumber := getRandomNumber(numberMin, numberMax)
 	for {
 		inputVariant := inputData("Type 'q' for quit.\nEnter 1 if you think a number. Enter 2 if computer think a number: ")
 		switch inputVariant {
 		case "1":
-			variant1(compNumber, numberMin, numberMax)
+			variant1()
 		case "2":
-			variant2(compNumber, numberMin, numberMax)
+			variant2()
 		default:
 			print("InputErr", 0, 0)
 		}
