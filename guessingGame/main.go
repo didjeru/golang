@@ -43,6 +43,8 @@ func print(value string) {
 		fmt.Println("\nYour number < computer number. Try again!")
 	case "userPlus":
 		fmt.Println("\nYour number > computer number. Try again!")
+	case "err":
+		fmt.Println("\nWRONG INPUT!")
 	default:
 		fmt.Println("error")
 	}
@@ -69,8 +71,7 @@ func variant1() {
 			compNumber = getRandomNumber(numberMin, numberMax)
 			print("comp")
 		default:
-			fmt.Println("\nWRONG INPUT!")
-			print("comp")
+			print("err")
 		}
 	}
 }
@@ -81,7 +82,7 @@ func variant2() {
 	for {
 		userNumber, err := strconv.Atoi(inputData("\nType 'm' for menu, 'q' for quit.\nEnter your numer: "))
 		if err != nil {
-			fmt.Println("\nWrong number")
+			print("err")
 		}
 		countTry++
 		if compNumber == userNumber {
@@ -94,7 +95,6 @@ func variant2() {
 		if compNumber < userNumber {
 			print("userPlus")
 		}
-		fmt.Println(countTry, compNumber, userNumber)
 	}
 }
 
@@ -110,7 +110,7 @@ func menu() {
 		case "2":
 			variant2()
 		default:
-			fmt.Println("Wrong input number")
+			print("err")
 		}
 	}
 }
