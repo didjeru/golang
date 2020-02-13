@@ -48,11 +48,15 @@ func print(value string, countTry, compNumber int) {
 	}
 }
 
-func variant1() {
+func settings() {
 	numberMin, numberMax := 0, 100
 	compNumber := getRandomNumber(numberMin, numberMax)
-	fmt.Printf("\nThink of a number in the range of %d to about %d", numberMin, numberMax)
 	countTry := 0
+}
+
+func variant1() {
+	settings()
+	fmt.Printf("\nThink of a number in the range of %d to about %d", numberMin, numberMax)
 	print("comp", countTry, compNumber)
 	for {
 		inputSymbol := inputData("\nType 'm' for menu, 'q' for quit.\nEnter symbol < = >: ")
@@ -79,10 +83,8 @@ func variant1() {
 }
 
 func variant2() {
-	numberMin, numberMax := 0, 100
-	compNumber := getRandomNumber(numberMin, numberMax)
+	settings()
 	fmt.Printf("\nComputer think of a number in the range of %d to about %d", numberMin, numberMax)
-	countTry := 0
 	for {
 		userNumber, err := strconv.Atoi(inputData("\nType 'm' for menu, 'q' for quit.\nEnter your numer: "))
 		if err != nil {
